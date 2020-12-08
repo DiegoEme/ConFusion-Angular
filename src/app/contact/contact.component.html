@@ -39,7 +39,12 @@
   <div fxFlex fxFlexOffset="20px" class="form-size">
     <h3>Send us your feedback</h3>
     <p>{{ feedbackForm.value | json }} - {{ feedbackForm.status | json }}</p>
-    <form novalidate [formGroup]="feedbackForm" (ngSubmit)="onSubmit()">
+    <form
+      novalidate
+      [formGroup]="feedbackForm"
+      #fform="ngForm"
+      (ngSubmit)="onSubmit()"
+    >
       <p>
         <mat-form-field class="half-width">
           <input
@@ -49,6 +54,13 @@
             type="text"
             required
           />
+          <mat-error
+            *ngIf="
+              feedbackForm.get('firstname').hasError('required') &&
+              feedbackForm.get('firstname').touched
+            "
+            >First name is required</mat-error
+          >
         </mat-form-field>
         <mat-form-field class="half-width">
           <input
@@ -58,6 +70,13 @@
             type="text"
             required
           />
+          <mat-error
+            *ngIf="
+              feedbackForm.get('lastname').hasError('required') &&
+              feedbackForm.get('lastname').touched
+            "
+            >Last name is required</mat-error
+          >
         </mat-form-field>
       </p>
       <p>
@@ -76,6 +95,13 @@
             placeholder="Email"
             type="email"
           />
+          <mat-error
+            *ngIf="
+              feedbackForm.get('email').hasError('email') &&
+              feedbackForm.get('email').touched
+            "
+            >Email is required</mat-error
+          >
         </mat-form-field>
       </p>
       <table>
@@ -103,6 +129,7 @@
         </mat-form-field>
       </p>
       <button
+        [disabled]="feedbackForm.invalid"
         type="submit"
         mat-button
         class="background-primary text-floral-white"
