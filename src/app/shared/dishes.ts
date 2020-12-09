@@ -91,7 +91,7 @@ export const DISHES: Dish[] = [
         name: 'Vadonut',
         image: '/assets/images/vadonut.png',
         category: 'appetizer',
-        featured: false,
+        featured: true,
         label: 'New',
         price: '1.99',
         description: 'A quintessential ConFusion experience, is it a vada or is it a donut?',
