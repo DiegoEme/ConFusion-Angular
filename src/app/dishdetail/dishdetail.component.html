@@ -47,11 +47,16 @@
       </mat-list-item>
     </mat-list>
 
-    <mat-list-item *ngIf="commentForm.valid">
-      <p matLine>{{ commentForm.value.comment }}</p>
-      <p matLine>{{ commentForm.value.rating }}</p>
-      <p matLine>{{ commentForm.value.author }}</p>
-    </mat-list-item>
+    <mat-list *ngIf="commentForm.valid">
+      <mat-list-item>
+        <p matLine>{{ commentForm.value.comment }}</p>
+        <p matLine>{{ commentForm.value.rating }} stars</p>
+        <p matLine>
+          -- {{ commentForm.value.author }} {{ commentForm.value.date | date }}
+        </p>
+      </mat-list-item>
+    </mat-list>
+
     <p>{{ commentForm.value | json }}-{{ commentForm.status | json }}</p>
     <form
       novalidate
@@ -99,6 +104,7 @@
         </mat-form-field>
       </p>
       <button
+        [disabled]="commentForm.invalid"
         type="submit"
         mat-button
         class="background-primary text-floral-white"
