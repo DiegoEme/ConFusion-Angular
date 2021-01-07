@@ -1,12 +1,19 @@
 <div
   class="container"
-  fxLayout="row"
+  fxLayout="row wrap"
   fxLayout.sm="column"
   fxLayout.xs="column"
   fxLayoutAlign.gt-md="space-around center"
   fxLayoutGap="10px"
   fxLayoutGap.xs="0"
 >
+<div fxFlex="100">
+  <div>
+    <h3 *ngIf="dish">{{dish.name | uppercase}}</h3>
+    <hr>
+  </div>
+</div>
+
   <div fxFlex="40" *ngIf="dish" [@visibility]="visibility" [@expand]>
     <mat-card>
       <mat-card-header>
@@ -15,7 +22,7 @@
         </mat-card-title>
       </mat-card-header>
       <img
-        mat-card-img
+        mat-card-image
         src="{{ BaseURL + dish.image }}"
         alt="{{ dish.name }}"
       />
@@ -61,7 +68,7 @@
       </mat-list-item>
     </mat-list>
 
-    <p>{{ commentForm.value | json }}-{{ commentForm.status | json }}</p>
+   
     <form
       novalidate
       [formGroup]="commentForm"
